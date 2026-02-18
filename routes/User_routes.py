@@ -17,9 +17,9 @@ def create_user(user: UserSchema, db: Session = Depends(get_db)):
 
 # 2. Get All Users
 @router.get("/users")
-def get_all_users(db: Session = Depends(get_db)):
+def get_all_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     user_repo = UserRepo(db)
-    users = user_repo.get_all_users()
+    users = user_repo.get_all_users(skip=skip, limit=limit)
     return users
 
 # 3. Get User by ID

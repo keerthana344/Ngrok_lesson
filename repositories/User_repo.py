@@ -10,8 +10,8 @@ class UserRepo:
         self.db.commit()
         return user
 
-    def get_all_users(self):
-        return self.db.query(User).all()
+    def get_all_users(self, skip: int = 0, limit: int = 100):
+        return self.db.query(User).offset(skip).limit(limit).all()
 
     def get_user_by_id(self,id:int):
         return self.db.query(User).filter(User.id == id).first()
